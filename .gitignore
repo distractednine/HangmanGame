@@ -1,0 +1,27 @@
+*.7z
+*.cache
+*.log
+*.orig
+*.orig
+*.sublime-workspace
+*.suo
+*.user
+*.zip
+*_NCrunch*
+*_ReSharper*
+*.idea
+.paket/paket.exe
+.vs
+.cr
+bin
+logs
+node_modules
+obj
+out
+
+# Do not include actual packages as they will be extracted either on dev or on build system.
+packages/
+
+logs
+UpgradeLog.htm
+server_log.txt
