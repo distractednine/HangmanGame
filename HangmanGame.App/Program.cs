@@ -29,6 +29,7 @@ namespace HangmanGame.App
             var wordProvider = serviceProvider.GetService<IWordsProvider>();
             var userOutput = serviceProvider.GetService<UserOutput>();
             var userInput = serviceProvider.GetService<UserInput>();
+            var userInputParser = serviceProvider.GetService<IUserInputParser>();
 
             userOutput("Hello from Hangman Game!");
             userOutput("Please select the action");
@@ -36,7 +37,9 @@ namespace HangmanGame.App
             var mainMenu =
                 new MainMenu(wordProvider,
                     userInput,
-                    userOutput);
+                    userOutput,
+                    userInputParser
+                    );
 
             await consoleCommandExecutor.ShowMenuWithActions(mainMenu, true);
         }

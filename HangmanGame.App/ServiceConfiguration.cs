@@ -33,10 +33,15 @@ namespace HangmanGame.App
                 {
                     builder.AddProvider(GetLoggerProvider());
                     builder.SetMinimumLevel(LogLevel.Debug);
+
+                    // remove default logging output for HttpClientFactory
+                    builder.AddFilter("Microsoft.Extensions.Http.DefaultHttpClientFactory", LogLevel.Warning);
+                    builder.AddFilter("System.Net.Http.HttpClient.Default", LogLevel.Warning);
                 })
 
                 // services registration
                 .AddTransient<IWordsProvider, WordsProvider>()
+                .AddTransient<IUserInputParser, UserInputParser>()
 
                 // utilities
                 .AddTransient<IConsoleCommandExecutor, ConsoleCommandExecutor>()

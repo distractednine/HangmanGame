@@ -57,8 +57,8 @@ namespace HangmanGame.App.Services
             var words =
                 responseItems
                     .AsJEnumerable()
-                    .Select(x => x["item"].Value<string>())
-                    .Where(x => x.Length >= MinWordLength)
+                    .Select(x => x["item"].Value<string>().ToLowerInvariant())
+                    .Where(x => x.Length > MinWordLength)
                     .ToArray();
 
             return words;

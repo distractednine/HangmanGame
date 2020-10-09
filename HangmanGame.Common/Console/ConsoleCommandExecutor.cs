@@ -56,7 +56,7 @@ namespace HangmanGame.Common.Console
                 var level = isSuccessful ? LogLevel.Information : LogLevel.Error;
 
                 _userOutput(
-                    $"`{actionToExecute.Name}` command finished execution with {result}{Constants.Nl}Press `Enter` to continue{Constants.Nl}",
+                    $"Action finished with {result}{Constants.Nl}Press `Enter` to continue{Constants.Nl}",
                     level);
                 _userOutput("");
                 _userInput();
@@ -126,7 +126,7 @@ namespace HangmanGame.Common.Console
                 }
                 if (userInput == Constants.QuitButton && isMainMenu)
                 {
-                    ShowTerminatingOutput(isMainMenu);
+                    ShowTerminatingOutput(true);
                     return null;
                 }
                 if (userInput == Constants.ReturnButton && !isMainMenu)
