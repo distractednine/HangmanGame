@@ -32,14 +32,14 @@ namespace HangmanGame.App
             var gameDrawer = serviceProvider.GetService<IGameInterfaceManager>();
             var gameMediator = serviceProvider.GetService<IGameMediator>();
 
-            gameDrawer.ShowGreeting();
-
             var mainMenu =
                 new MainMenu(wordProvider,
                     userOutput,
                     userInputParser,
                     gameDrawer,
                     gameMediator);
+
+            gameDrawer.ShowGreeting();
 
             await consoleCommandExecutor.ShowMenuWithActions(mainMenu, true);
         }
