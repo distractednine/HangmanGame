@@ -10,6 +10,8 @@ namespace HangmanGame.Common
 
         public const string AbortGamePhrase = "break";
 
+        public static string PressEnterCont = $"Press `Enter` to continue{Environment.NewLine}";
+
         public static readonly string Nl = Environment.NewLine;
 
         public const int MaxAttemptsCount = 6;

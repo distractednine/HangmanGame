@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using HangmanGame.App.Menu;
 using HangmanGame.App.Services.Interfaces;
+using HangmanGame.Common;
 using HangmanGame.Common.Console.Interfaces;
 using HangmanGame.Common.Delegates;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +13,7 @@ namespace HangmanGame.App
     {
         private static async Task Main()
         {
-            // ReSharper disable once AssignNullToNotNullAttribute
+            // ReSharper disable once AssignNullToNotNullAttribute - used to set window title
             Console.Title = typeof(Program).Namespace;
 
             var serviceConfiguration = new ServiceConfiguration();
@@ -33,6 +34,7 @@ namespace HangmanGame.App
             var userInput = serviceProvider.GetService<UserInput>();
             var userInputParser = serviceProvider.GetService<IUserInputParser>();
             var gameDrawer = serviceProvider.GetService<IGameRoundDrawer>();
+            var gameMediator = serviceProvider.GetService<IGameMediator>();
 
             ShowGreeting(userOutput, vectorProvider);
 
@@ -41,15 +43,16 @@ namespace HangmanGame.App
                     userInput,
                     userOutput,
                     userInputParser,
-                    gameDrawer);
+                    gameDrawer,
+                    gameMediator);
 
             await consoleCommandExecutor.ShowMenuWithActions(mainMenu, true);
         }
 
         private static void ShowGreeting(UserOutput userOutput, IVectorProvider vectorProvider)
         {
-            userOutput("Hello from Hangman Game!");
-            userOutput(vectorProvider.GetFullHangmanVector());
+            var vector = vectorProvider.GetFullHangmanVector();
+            userOutput($"Welcome to Hangman Game!{Constants.Nl}{vector}");
         }
     }
 }

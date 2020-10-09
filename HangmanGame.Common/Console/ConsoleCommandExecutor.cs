@@ -63,8 +63,7 @@ namespace HangmanGame.Common.Console
                 _userOutput(
                     $"Action finished with {result}{Constants.Nl}",
                     LogLevel.Trace);
-                _userOutput(
-                    $"Press `Enter` to continue{Constants.Nl}");
+                _userOutput(Constants.PressEnterCont);
 
                 _userOutput("");
                 _userInput();

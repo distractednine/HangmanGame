@@ -43,6 +43,7 @@ namespace HangmanGame.App
                 .AddTransient<IWordsProvider, WordsProvider>()
                 .AddTransient<IUserInputParser, UserInputParser>()
                 .AddTransient<IGameRoundDrawer, GameRoundDrawer>()
+                .AddTransient<IGameMediator, GameMediator>()
                 .AddTransient<IVectorProvider, VectorProvider>()
 
                 // utilities
@@ -73,7 +74,7 @@ namespace HangmanGame.App
         private ILoggerProvider GetLoggerProvider()
         {
             var configureNamedOptions = 
-                new ConfigureNamedOptions<ConsoleLoggerOptions>("", opts => { });
+                new ConfigureNamedOptions<ConsoleLoggerOptions>(string.Empty, opts => { });
 
             var optionsFactory = new OptionsFactory<ConsoleLoggerOptions>(
                 new[] { configureNamedOptions },
