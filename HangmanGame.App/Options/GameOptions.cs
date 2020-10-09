@@ -9,5 +9,7 @@ namespace HangmanGame.App.Options
         public string WordAssociationsApiKey { get; set; }
 
         public IReadOnlyCollection<string> Categories { get; set; }
+
+        public int MinimalWordLength { get; set; }
     }
 }

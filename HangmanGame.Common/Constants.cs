@@ -8,6 +8,10 @@ namespace HangmanGame.Common
 
         public const string ReturnButton = "r";
 
+        public const string AbortGamePhrase = "break";
+
         public static readonly string Nl = Environment.NewLine;
+
+        public const int MaxAttemptsCount = 6;
     }
 }

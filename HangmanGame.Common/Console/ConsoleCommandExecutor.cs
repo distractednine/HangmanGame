@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using HangmanGame.Common.Console.Interfaces;
 using HangmanGame.Common.Delegates;
+using HangmanGame.Common.Exceptions;
 using Microsoft.Extensions.Logging;
 
 namespace HangmanGame.Common.Console
@@ -47,17 +48,24 @@ namespace HangmanGame.Common.Console
                 {
                     isSuccessful = await actionToExecute.Action();
                 }
+                catch (GameAbortException)
+                {
+                    System.Console.Clear();
+                    _userOutput("User aborted the game.");
+                }
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "Error occurred on action execution");
                 }
 
                 var result = isSuccessful ? "success" : "failure";
-                var level = isSuccessful ? LogLevel.Information : LogLevel.Error;
 
                 _userOutput(
-                    $"Action finished with {result}{Constants.Nl}Press `Enter` to continue{Constants.Nl}",
-                    level);
+                    $"Action finished with {result}{Constants.Nl}",
+                    LogLevel.Trace);
+                _userOutput(
+                    $"Press `Enter` to continue{Constants.Nl}");
+
                 _userOutput("");
                 _userInput();
             }

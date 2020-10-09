@@ -1,5 +1,6 @@
 ﻿using HangmanGame.App.Services.Interfaces;
 using HangmanGame.Common.Delegates;
+using HangmanGame.Common.Exceptions;
 
 namespace HangmanGame.App.Services
 {
@@ -14,21 +15,45 @@ namespace HangmanGame.App.Services
             _userOutput = userOutput;
         }
 
-        public bool TryGetNotEmptyString(string fieldName, out string parsedValue)
+        public bool TryGetNotEmptyString(string fieldName, out string parsedValue, string abortString = null)
         {
             _userOutput($"Enter the `{fieldName}`:");
 
-            parsedValue = _userInput();
+            parsedValue = _userInput().Trim();
 
-            var isValid = !string.IsNullOrWhiteSpace(parsedValue);
+            var isEmpty = !string.IsNullOrWhiteSpace(parsedValue);
 
-            if (!isValid)
+            if (!isEmpty)
             {
                 _userOutput(
                     $"Invalid input. The `{fieldName}` should not be empty. Terminating action");
             }
+            if (string.Equals(parsedValue, abortString))
+            {
+                throw new GameAbortException();
+            }
 
-            return isValid;
+            return isEmpty;
+        }
+
+        public bool TryGetCharLetter(string fieldName, out char parsedValue, string abortString = null)
+        {
+            parsedValue = default;
+            if (!TryGetNotEmptyString(fieldName, out var parsedString, abortString))
+            {
+                return false;
+            }
+
+            var isValidChar = 
+                char.TryParse(parsedString, out var parsedChar) && 
+                char.IsLetter(parsedChar);
+
+            if (!isValidChar)
+            {
+                _userOutput("Invalid input. Only one letter should be entered");
+            }
+
+            return isValidChar;
         }
     }
 }

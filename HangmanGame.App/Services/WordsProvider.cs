@@ -13,7 +13,6 @@ namespace HangmanGame.App.Services
     {
         private const string WordUrlSection = "{text}";
         private const string ApiKeyUrlSection = "{apiKey}";
-        private const int MinWordLength = 3;
 
         private readonly GameOptions _gameOptions;
         private readonly IHttpClientFactory _httpClientFactory;
@@ -41,10 +40,11 @@ namespace HangmanGame.App.Services
 
             var responseString = await serverResponse.Content.ReadAsStringAsync();
 
-            return GetWordsFromApiResponse(responseString);
+            return GetWordsFromApiResponse(responseString, _gameOptions.MinimalWordLength);
         }
 
-        private static IReadOnlyCollection<string> GetWordsFromApiResponse(string responseString)
+        private static IReadOnlyCollection<string> GetWordsFromApiResponse(
+            string responseString, int minWordLength)
         {
             var responseChildren =
                 JObject.Parse(responseString)
@@ -58,7 +58,7 @@ namespace HangmanGame.App.Services
                 responseItems
                     .AsJEnumerable()
                     .Select(x => x["item"].Value<string>().ToLowerInvariant())
-                    .Where(x => x.Length > MinWordLength)
+                    .Where(x => x.Length >= minWordLength)
                     .ToArray();
 
             return words;

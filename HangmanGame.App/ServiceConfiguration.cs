@@ -42,6 +42,8 @@ namespace HangmanGame.App
                 // services registration
                 .AddTransient<IWordsProvider, WordsProvider>()
                 .AddTransient<IUserInputParser, UserInputParser>()
+                .AddTransient<IGameRoundDrawer, GameRoundDrawer>()
+                .AddTransient<IVectorProvider, VectorProvider>()
 
                 // utilities
                 .AddTransient<IConsoleCommandExecutor, ConsoleCommandExecutor>()
