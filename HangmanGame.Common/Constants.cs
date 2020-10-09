@@ -15,5 +15,7 @@ namespace HangmanGame.Common
         public static readonly string Nl = Environment.NewLine;
 
         public const int MaxAttemptsCount = 6;
+
+        public const int ZeroAttempt = 0;
     }
 }

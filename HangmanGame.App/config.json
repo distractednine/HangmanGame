@@ -2,7 +2,7 @@
   "GameOptions": {
     "WordAssociationsUrlTemplate": "https://api.wordassociations.net/associations/v1.0/json/search?apikey={apiKey}&text={text}&lang=en&pos=noun",
     "WordAssociationsApiKey": "8dc617ac-e82d-4dd1-ba25-e82fe3afa643",
-    "Categories": [ "culture", "hobby", "animals", "history", "music", "computers", "automobiles", "toy" ],
+    "Categories": [ "culture", "hobby", "animals", "history", "music", "computers", "automobiles" ],
     "MinimalWordLength": 5 
   } 
 }

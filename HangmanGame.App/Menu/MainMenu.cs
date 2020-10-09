@@ -12,29 +12,25 @@ namespace HangmanGame.App.Menu
     {
         private static readonly Random Random = new Random();
         private readonly IWordsProvider _wordsProvider;
-        private readonly UserInput _userInput;
         private readonly UserOutput _userOutput;
         private readonly IUserInputParser _userInputParser;
-        private readonly IGameRoundDrawer _gameRoundDrawer;
+        private readonly IGameInterfaceManager _gameInterfaceManager;
         private readonly IGameMediator _gameMediator;
 
         public MainMenu(IWordsProvider wordsProvider, 
-            UserInput userInput, 
             UserOutput userOutput,
             IUserInputParser userInputParser,
-            IGameRoundDrawer gameRoundDrawer,
-            IGameMediator gameMediator
-            )
+            IGameInterfaceManager gameInterfaceManager,
+            IGameMediator gameMediator)
         {
             _wordsProvider = wordsProvider;
-            _userInput = userInput;
             _userOutput = userOutput;
             _userInputParser = userInputParser;
-            _gameRoundDrawer = gameRoundDrawer;
+            _gameInterfaceManager = gameInterfaceManager;
             _gameMediator = gameMediator;
         }
 
-        [MenuItem("Play game", "1")]
+        [MenuItem("Play game", "p")]
         // ReSharper disable once UnusedMember.Global - used by reflection to load actions dynamically
         public async Task<bool> PlayGame()
         {
@@ -46,7 +42,9 @@ namespace HangmanGame.App.Menu
 
             var wordToGuess = await GetWordToGuess(category);
 
-            _gameMediator.PlayGame(category, wordToGuess);
+            var gameResult = _gameMediator.PlayGame(category, wordToGuess);
+
+            _gameInterfaceManager.ShowGameResult(gameResult, wordToGuess);
 
             return await Success();
         }

@@ -15,16 +15,16 @@ namespace HangmanGame.App.Services
         private readonly UserInput _userInput;
         private readonly UserOutput _userOutput;
         private readonly IUserInputParser _userInputParser;
-        private readonly IGameRoundDrawer _gameRoundDrawer;
+        private readonly IGameInterfaceManager _gameInterfaceManager;
 
         public GameMediator(UserInput userInput, UserOutput userOutput, 
             IUserInputParser userInputParser, 
-            IGameRoundDrawer gameRoundDrawer)
+            IGameInterfaceManager gameInterfaceManager)
         {
             _userInput = userInput;
             _userOutput = userOutput;
             _userInputParser = userInputParser;
-            _gameRoundDrawer = gameRoundDrawer;
+            _gameInterfaceManager = gameInterfaceManager;
         }
 
         public GameResult PlayGame(string category, string wordToGuess)
@@ -36,7 +36,7 @@ namespace HangmanGame.App.Services
 
             do
             {
-                _gameRoundDrawer.DrawGameRound(
+                _gameInterfaceManager.ShowGameRound(
                     category, wordToGuess, foundLetters, leftAttempts);
 
                 if (!_userInputParser.TryGetCharLetter("letter",
@@ -69,12 +69,12 @@ namespace HangmanGame.App.Services
             if (containsChar)
             {
                 foundLetters.Add(enteredChar);
-                _userOutput("This letter is correct!", LogLevel.Information);
+                _userOutput("This letter is present in a guessed word!", LogLevel.Information);
             }
             else
             {
                 leftAttempts--;
-                _userOutput("This letter is incorrect!", LogLevel.Error);
+                _userOutput("This letter is NOT present in a guessed word!", LogLevel.Error);
             }
         }
 

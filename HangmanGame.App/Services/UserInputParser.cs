@@ -48,6 +48,8 @@ namespace HangmanGame.App.Services
                 char.TryParse(parsedString, out var parsedChar) && 
                 char.IsLetter(parsedChar);
 
+            parsedValue = parsedChar;
+
             if (!isValidChar)
             {
                 _userOutput("Invalid input. Only one letter should be entered");
