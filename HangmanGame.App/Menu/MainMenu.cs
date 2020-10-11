@@ -73,7 +73,7 @@ namespace HangmanGame.App.Menu
 
         private async Task<string> GetWordToGuess(string category)
         {
-            var wordsByCategory = await _wordsProvider.GetWordsByCategoryAsync(category);
+            var wordsByCategory = await _wordsProvider.GetWordsByCategoryOrEmptyAsync(category);
 
             if (!wordsByCategory.Any())
             {

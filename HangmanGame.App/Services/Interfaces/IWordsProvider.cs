@@ -7,6 +7,8 @@ namespace HangmanGame.App.Services.Interfaces
     {
         IReadOnlyCollection<string> GetWordCategories();
 
+        Task<IReadOnlyCollection<string>> GetWordsByCategoryOrEmptyAsync(string category);
+
         Task<IReadOnlyCollection<string>> GetWordsByCategoryAsync(string category);
     }
 }
