@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using HangmanGame.App.Options;
 using HangmanGame.App.Services.Interfaces;
+using HangmanGame.Common.Delegates;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 
@@ -14,18 +17,44 @@ namespace HangmanGame.App.Services
         private const string WordUrlSection = "{text}";
         private const string ApiKeyUrlSection = "{apiKey}";
 
+        private const string RetrievingWordsByCategoryErrorMessage =
+            "Error occurred while obtaining the words by category";
+
         private readonly GameOptions _gameOptions;
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly UserOutput _userOutput;
+        private readonly ILogger<WordsProvider> _logger;
 
-        public WordsProvider(IOptions<GameOptions> gameOptions, IHttpClientFactory httpClientFactory)
+        public WordsProvider(IOptions<GameOptions> gameOptions, 
+            IHttpClientFactory httpClientFactory,
+            UserOutput userOutput,
+            ILogger<WordsProvider> logger)
         {
             _gameOptions = gameOptions.Value;
             _httpClientFactory = httpClientFactory;
+            _userOutput = userOutput;
+            _logger = logger;
         }
 
         public IReadOnlyCollection<string> GetWordCategories() => _gameOptions.Categories;
 
-        public async Task<IReadOnlyCollection<string>> GetWordsByCategoryAsync(string category)
+        public async Task<IReadOnlyCollection<string>> GetWordsByCategoryAsync(
+            string category)
+        {
+            try
+            {
+                return await GetWordsByCategoryAsyncInternal(category);
+            }
+            catch (Exception exception)
+            {
+                _userOutput(RetrievingWordsByCategoryErrorMessage, LogLevel.Error);
+                _logger.LogError(exception, RetrievingWordsByCategoryErrorMessage);
+
+                return new string[0];
+            }
+        }
+
+        private async Task<IReadOnlyCollection<string>> GetWordsByCategoryAsyncInternal(string category)
         {
             var url =
                 _gameOptions.WordAssociationsUrlTemplate

@@ -1,4 +1,6 @@
-﻿using HangmanGame.App.Services.Interfaces;
+﻿using System;
+using HangmanGame.App.Services.Interfaces;
+using HangmanGame.Common;
 
 namespace HangmanGame.App.Services
 {
@@ -11,7 +13,14 @@ namespace HangmanGame.App.Services
 
         public string GetHangmanVectorByAttempt(int leftAttempts)
         {
-            return HangmanVectors[LastHangmanVectorIndex - leftAttempts];
+            var vectorIndex = LastHangmanVectorIndex - leftAttempts;
+
+            if (vectorIndex < Constants.ZeroAttempt || vectorIndex > LastHangmanVectorIndex)
+            {
+                throw new ArgumentException(nameof(leftAttempts));
+            }
+
+            return HangmanVectors[vectorIndex];
         }
 
         private int LastHangmanVectorIndex => HangmanVectors.Length - 1;
