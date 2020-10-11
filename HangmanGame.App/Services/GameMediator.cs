@@ -78,7 +78,7 @@ namespace HangmanGame.App.Services
             }
         }
 
-        private GameResult GetGameResult(IReadOnlyCollection<char> foundLetters, int leftAttempts,
+        private static GameResult GetGameResult(IReadOnlyCollection<char> foundLetters, int leftAttempts,
             int foundLettersGoal)
         {
             if (leftAttempts == 0)
