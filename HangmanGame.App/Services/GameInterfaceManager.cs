@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using HangmanGame.App.Services.Interfaces;
 using HangmanGame.Common;
+using HangmanGame.Common.Console.Interfaces;
 using HangmanGame.Common.Delegates;
 using HangmanGame.Common.Enums;
 using HangmanGame.Common.Exceptions;
@@ -13,11 +13,15 @@ namespace HangmanGame.App.Services
     {
         private readonly IVectorProvider _vectorProvider;
         private readonly UserOutput _userOutput;
+        private readonly IConsoleWrapper _consoleWrapper;
 
-        public GameInterfaceManager(IVectorProvider vectorProvider, UserOutput userOutput)
+        public GameInterfaceManager(IVectorProvider vectorProvider,
+            UserOutput userOutput, 
+            IConsoleWrapper consoleWrapper)
         {
             _vectorProvider = vectorProvider;
             _userOutput = userOutput;
+            _consoleWrapper = consoleWrapper;
         }
 
         public void ShowGreeting()
@@ -29,7 +33,7 @@ namespace HangmanGame.App.Services
         public void ShowGameRound(string category, string word, IReadOnlyCollection<char> foundLetters, 
             int leftAttempts)
         {
-            Console.Clear();
+            _consoleWrapper.Clear();
 
             ShowCategory(category);
             ShowWord(word, foundLetters);
@@ -44,7 +48,7 @@ namespace HangmanGame.App.Services
                 throw new HangmanGameException($"Invalid {nameof(gameResult)} provided!");
             }
 
-            Console.Clear();
+            _consoleWrapper.Clear();
 
             string gameResultOutput;
             int hangmanState;

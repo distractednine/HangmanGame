@@ -48,6 +48,7 @@ namespace HangmanGame.App
 
                 // utilities
                 .AddTransient<IConsoleCommandExecutor, ConsoleCommandExecutor>()
+                .AddTransient<IConsoleWrapper, ConsoleWrapper>()
                 .AddSingleton<UserInput>(Console.ReadLine)
                 .AddSingleton<UserOutput>(sp =>
                 {

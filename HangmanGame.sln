@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HangmanGame.App", "HangmanG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HangmanGame.Common", "HangmanGame.Common\HangmanGame.Common.csproj", "{AD5ED404-1E0D-4E44-9A75-825813B2CAC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangmanGame.UnitTests", "HangmanGame.UnitTests\HangmanGame.UnitTests.csproj", "{1C7E34D0-FD2F-42EA-8878-E9E7D6209ED0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HangmanGame.UnitTests", "HangmanGame.UnitTests\HangmanGame.UnitTests.csproj", "{1C7E34D0-FD2F-42EA-8878-E9E7D6209ED0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

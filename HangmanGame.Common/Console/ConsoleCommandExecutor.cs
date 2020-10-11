@@ -17,14 +17,17 @@ namespace HangmanGame.Common.Console
         private readonly UserInput _userInput;
         private readonly UserOutput _userOutput;
         private readonly ILogger<ConsoleCommandExecutor> _logger;
+        private readonly IConsoleWrapper _consoleWrapper;
 
         public ConsoleCommandExecutor(UserInput userInput, 
             UserOutput userOutput, 
-            ILogger<ConsoleCommandExecutor> logger)
+            ILogger<ConsoleCommandExecutor> logger,
+            IConsoleWrapper consoleWrapper)
         {
             _userInput = userInput;
             _userOutput = userOutput;
             _logger = logger;
+            _consoleWrapper = consoleWrapper;
         }
 
         public async Task ShowMenuWithActions<T>(T actionsHolder, bool isMainMenu)
@@ -50,7 +53,7 @@ namespace HangmanGame.Common.Console
                 }
                 catch (GameAbortException)
                 {
-                    System.Console.Clear();
+                    _consoleWrapper.Clear();
                     _userOutput("User aborted the game.");
                 }
                 catch (Exception ex)
