@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HangmanGame.App.Enums;
 using HangmanGame.App.Services.Interfaces;
 using HangmanGame.Common;
 using HangmanGame.Common.Delegates;
+using HangmanGame.Common.Enums;
 using HangmanGame.Common.Exceptions;
 
 namespace HangmanGame.App.Services

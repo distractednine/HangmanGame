@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using HangmanGame.App.Enums;
+using HangmanGame.Common.Enums;
 
 namespace HangmanGame.App.Services.Interfaces
 {

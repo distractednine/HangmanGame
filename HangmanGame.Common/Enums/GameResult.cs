@@ -1,6 +1,6 @@
-﻿namespace HangmanGame.App.Enums
+﻿namespace HangmanGame.Common.Enums
 {
-    internal enum GameResult
+    public enum GameResult
     {
         InProcess = 0,
         Victory = 1,
