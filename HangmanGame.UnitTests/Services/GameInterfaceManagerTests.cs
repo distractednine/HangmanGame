@@ -74,7 +74,6 @@ namespace HangmanGame.UnitTests.Services
                     Constants.MaxAttemptsCount));
         }
 
-
         [Fact]
         public void ShowGameResult_DrawsLossCorrectly()
         {
