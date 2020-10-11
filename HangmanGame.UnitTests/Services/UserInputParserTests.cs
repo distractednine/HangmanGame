@@ -135,7 +135,7 @@ namespace HangmanGame.UnitTests.Services
             action.Should().Throw<GameAbortException>();
         }
 
-        private UserInput GetSetupUserInput(string inputString)
+        private static UserInput GetSetupUserInput(string inputString)
         {
             var userInputMock = Substitute.For<UserInput>();
 

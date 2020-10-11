@@ -18,11 +18,12 @@ namespace HangmanGame.UnitTests.Services
 {
     public class WordsProviderTests
     {
-        private readonly IOptions<GameOptions> _gameOptionsMock;
-        private readonly ILogger<WordsProvider> _loggerMock;
         private const string Category = "testCategory";
         private const string InvalidResponseText = "invalidResponseText";
 
+        private readonly IOptions<GameOptions> _gameOptionsMock;
+        private readonly ILogger<WordsProvider> _loggerMock;
+        
         public WordsProviderTests()
         {
             _gameOptionsMock = GetGameOptionsMock();

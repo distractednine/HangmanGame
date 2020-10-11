@@ -60,8 +60,8 @@ namespace HangmanGame.UnitTests.Services
         }
 
         [Theory]
-        [InlineData(2, Vector3)]
         [InlineData(4, Vector2)]
+        [InlineData(2, Vector3)]
         public void GetHangmanVectorByAttempt(int attemptNumber, string expectedText)
         {
             // Arrange
