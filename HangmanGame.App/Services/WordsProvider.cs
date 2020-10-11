@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 
 namespace HangmanGame.App.Services
 {
-    internal class WordsProvider : IWordsProvider
+    public class WordsProvider : IWordsProvider
     {
         private const string WordUrlSection = "{text}";
         private const string ApiKeyUrlSection = "{apiKey}";
