@@ -21,9 +21,9 @@ namespace HangmanGame.App.Services
 
             parsedValue = _userInput().Trim();
 
-            var isEmpty = !string.IsNullOrWhiteSpace(parsedValue);
+            var isNotEmpty = !string.IsNullOrWhiteSpace(parsedValue);
 
-            if (!isEmpty)
+            if (!isNotEmpty)
             {
                 _userOutput(
                     $"Invalid input. The `{fieldName}` should not be empty. Terminating action");
@@ -33,7 +33,7 @@ namespace HangmanGame.App.Services
                 throw new GameAbortException();
             }
 
-            return isEmpty;
+            return isNotEmpty;
         }
 
         public bool TryGetCharLetter(string fieldName, out char parsedValue, string abortString = null)

@@ -14,13 +14,13 @@ namespace HangmanGame.UnitTests.Services
     public class GameInterfaceManagerTests
     {
         private readonly IVectorProvider _vectorProvider;
-        private readonly IConsoleWrapper _consoleWrapper;
+        private readonly IConsoleWrapper _consoleWrapperMock;
         private const string WordToGuess = "testing";
 
         public GameInterfaceManagerTests()
         {
             _vectorProvider = new VectorProvider();
-            _consoleWrapper = Substitute.For<IConsoleWrapper>();
+            _consoleWrapperMock = Substitute.For<IConsoleWrapper>();
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace HangmanGame.UnitTests.Services
 
             var userOutputMock = Substitute.For<UserOutput>();
             var systemUnderTest = 
-                new GameInterfaceManager(_vectorProvider, userOutputMock, _consoleWrapper);
+                new GameInterfaceManager(_vectorProvider, userOutputMock, _consoleWrapperMock);
 
             // Act
             systemUnderTest.ShowGameRound(category, WordToGuess, foundLetters, leftAttempts);
@@ -57,7 +57,7 @@ namespace HangmanGame.UnitTests.Services
             // Arrange 
             var userOutputMock = Substitute.For<UserOutput>();
             var systemUnderTest =
-                new GameInterfaceManager(_vectorProvider, userOutputMock, _consoleWrapper);
+                new GameInterfaceManager(_vectorProvider, userOutputMock, _consoleWrapperMock);
 
             // Act
             systemUnderTest.ShowGameResult(GameResult.Victory, WordToGuess);
@@ -81,7 +81,7 @@ namespace HangmanGame.UnitTests.Services
             // Arrange 
             var userOutputMock = Substitute.For<UserOutput>();
             var systemUnderTest =
-                new GameInterfaceManager(_vectorProvider, userOutputMock, _consoleWrapper);
+                new GameInterfaceManager(_vectorProvider, userOutputMock, _consoleWrapperMock);
 
             // Act
             systemUnderTest.ShowGameResult(GameResult.Loss, WordToGuess);
