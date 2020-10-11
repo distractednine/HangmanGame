@@ -1,13 +1,21 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
+using NSubstitute;
+using HangmanGame.Common.Delegates;
 
 namespace HangmanGame.UnitTests.Services
 {
-    [TestClass]
     public class GameInterfaceManagerTests
     {
-        [TestMethod]
-        public void TestMethod1()
+        [Fact]
+        public void ShowGameRound_DrawsCorrectly()
         {
+            // Arrange
+            var userOutputMock = Substitute.For<UserOutput>();
+
+            // Act
+
+
+            // Assert
         }
     }
 }
