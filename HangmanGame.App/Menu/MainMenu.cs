@@ -51,7 +51,14 @@ namespace HangmanGame.App.Menu
 
         private bool TryGetCategory(out string category)
         {
+            category = default;
             var eligibleCategories = _wordsProvider.GetWordCategories();
+
+            if (!eligibleCategories.Any())
+            {
+                return false;
+            }
+
             var categoriesString = string.Join(", ", eligibleCategories);
 
             _userOutput($"Available categories: {categoriesString}.");
